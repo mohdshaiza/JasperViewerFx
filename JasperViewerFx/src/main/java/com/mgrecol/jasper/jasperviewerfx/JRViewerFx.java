@@ -1,4 +1,5 @@
 package com.mgrecol.jasper.jasperviewerfx;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -40,12 +41,6 @@ import javafx.util.Callback;
 
 import javax.imageio.ImageIO;
 
-
-
-
-
-
-
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
@@ -57,52 +52,48 @@ import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 
-
 /**
- * 
- */
-
-/**
- * @author  Michael Grecol
- *	@project JasperViewerFx
+ * @author Michael Grecol
+ * @project JasperViewerFx
  * @filename JRViewerFx.java
  * @date Mar 23, 2015
  */
-public class JRViewerFx  extends Application {
-	private JasperPrint jasperPrint;
-	private JRViewerFxMode printMode;
-	
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		InputStream fxmlStream = null;
-		try {
-			fxmlStream = getClass().getResourceAsStream("/FRViewerFx.fxml");
-			FXMLLoader loader = new FXMLLoader();
-			Parent page = (Parent) loader.load(fxmlStream);
-      Scene scene = new Scene(page);
+public class JRViewerFx extends Application {
+
+    private JasperPrint jasperPrint;
+    private JRViewerFxMode printMode;
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        InputStream fxmlStream = null;
+        try {
+            fxmlStream = getClass().getResourceAsStream("/FRViewerFx.fxml");
+            FXMLLoader loader = new FXMLLoader();
+            Parent page = (Parent) loader.load(fxmlStream);
+            Scene scene = new Scene(page);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Jasper Viewer for JavaFx");
             primaryStage.show();
             Object o = loader.getController();
-            if(o instanceof JRViewerFxController){
-            	JRViewerFxController jrViewerFxController = (JRViewerFxController)   o;
-            	jrViewerFxController.setJasperPrint(jasperPrint);
-            	jrViewerFxController.show();
+            if (o instanceof JRViewerFxController) {
+                JRViewerFxController jrViewerFxController = (JRViewerFxController) o;
+                jrViewerFxController.setJasperPrint(jasperPrint);
+                jrViewerFxController.show();
             }
 
         } catch (Exception ex) {
-          ex.printStackTrace();
+            ex.printStackTrace();
         }
-	}
-	
-public JRViewerFx(JasperPrint jasperPrint,JRViewerFxMode printMode, Stage primaryStage ){
-	this.jasperPrint = jasperPrint;
-	this.printMode=printMode;
-	try {
-		start(primaryStage);
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-}
+    }
+
+    public JRViewerFx(JasperPrint jasperPrint, JRViewerFxMode printMode, Stage primaryStage) {
+        this.jasperPrint = jasperPrint;
+        this.printMode = printMode;
+        try {
+            start(primaryStage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
